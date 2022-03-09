@@ -1,20 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { 
+  Button,
+  Text, 
+  View, 
+  SafeAreaView, 
+  TextInput
+} from 'react-native';
+import global from './styles/global';
+
+import PhoneTranslator from './helpers/PhoneTranslator';
 
 export default function App() {
+  const [text, setText] = useState('');
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+    <SafeAreaView style={global.container}>
       <StatusBar style="auto" />
-    </View>
+      <TextInput
+        style={global.input}
+        placeholder="Type here your text to convert it to number"
+        onChangeText={(text) => setText(text)}
+        value={text}
+      />
+      <Button
+        title="Convert to number"
+        onPress={() => alert(PhoneTranslator(text))}
+      />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
